@@ -1,0 +1,6 @@
+streamlit
+pandas
+pymongo
+dnspython
+inotify
+streamlit-pills
