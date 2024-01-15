@@ -31,8 +31,7 @@ def get_random_data(sample_size=1):
             return listdata
         
 # Use st.session_state to store the data
-if not st.session_state.data:
-    st.session_state.data = get_random_data()
+
 if st.button("Next"):
     st.session_state.data = get_random_data()
     st.session_state.keywords = []
