@@ -11,12 +11,17 @@ if "data" not in st.session_state:
     st.session_state["data"] = None
 if "keywords" not in st.session_state:
     st.session_state["keywords"] = []
-
 if "keywordnew" not in st.session_state:
     st.session_state["keywordnew"] = []
+if "my_text" not in st.session_state:
+    st.session_state.my_text = ""
 
 def send_api(data):
     collection_related.insert_one(data)
+
+def submit():
+    st.session_state.my_text = st.session_state.widget
+    st.session_state.widget = ""
 
 st.title("KeyToad")
 def get_random_data(sample_size=1):
@@ -47,7 +52,9 @@ keywords = st.session_state.data[0]["input"].split(",")
 # Allow user to select keywords
 choice = st.multiselect("Select Keywords", keywords + st.session_state.keywords)
 # Allow user to input additional keywords
-new_keyword = st.text_input("Add a new keyword:")
+
+st.text_input("Enter text here", key="widget", on_change=submit)
+new_keyword = st.session_state.my_text
 if new_keyword and new_keyword not in st.session_state.keywordnew and not "" :
     st.session_state.keywordnew.append(new_keyword)
 
@@ -73,6 +80,7 @@ if st.button("Submit"):
         send_api({"input": st.session_state.data[0]["input"], "related": ','.join(st.session_state.keyword+st.session_state.keywordnew),"output": st.session_state.data[0]["output"],"Emotion": selected_Emotion})
         # Get a new data
         # st.session_state.data = get_random_data()
+        st.write("You selected:", {"input": st.session_state.data[0]["input"], "related": ','.join(st.session_state.keyword+st.session_state.keywordnew),"output": st.session_state.data[0]["output"],"Emotion": selected_Emotion})
         st.session_state.keywords = []
         st.session_state.keywordnew = []
         st.session_state.data=None
