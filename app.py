@@ -66,10 +66,15 @@ selected_Emotion = pills("Emotional", ["Normal", "Luxury", "Chill", "Exclusive"]
 # Allow user to submit the keywords and input
 if st.button("Submit"):
     # Store the keywords in MongoDB
+    if st.session_state.data == None:
+        st.warning("Please click Next")
 
-    send_api({"input": st.session_state.data[0]["input"], "related": ', '.join(st.session_state.keyword+st.session_state.keywordnew),"output": st.session_state.data[0]["output"],"Emotion": selected_Emotion})
-    # Get a new data
-    st.session_state.data = get_random_data()
-    st.session_state.keywords = []
-    st.session_state.keywordnew = []
+    else:
+        send_api({"input": st.session_state.data[0]["input"], "related": ','.join(st.session_state.keyword+st.session_state.keywordnew),"output": st.session_state.data[0]["output"],"Emotion": selected_Emotion})
+        # Get a new data
+        # st.session_state.data = get_random_data()
+        st.session_state.keywords = []
+        st.session_state.keywordnew = []
+        st.session_state.data=None
+        st.success('Summit', icon="✅")
 
