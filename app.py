@@ -41,6 +41,7 @@ if "listemo" not in st.session_state:
 # Use st.session_state to store the data
 # if not st.session_state.data:
 #     st.session_state.data = get_random_data()
+st.write(f"Progress: {collection_related.count_documents({})}")
 if st.button("Next"):
     st.session_state.data = get_random_data()
 
