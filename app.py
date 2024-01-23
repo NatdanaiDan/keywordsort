@@ -8,7 +8,7 @@ client = MongoClient(
     server_api=ServerApi("1"),
 )
 db = client["keytoad"]
-collection_cosmetic = db["test"]
+collection_cosmetic = db["cosmetic_kw"]
 collection_related = db["mode_human"]
 old_values = [0, 1, 2, 3, 4]
 
