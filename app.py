@@ -4,7 +4,7 @@ from pymongo.server_api import ServerApi
 from streamlit_pills import pills
 
 client = MongoClient(
-    "mongodb+srv://64015037:2YqYA4kjsTImOMmY@keytoad.nslb9f9.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://XXXXX",
     server_api=ServerApi("1"),
 )
 db = client["keytoad"]
